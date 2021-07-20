@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>{% block title %}Работники{% endblock %}</h1>
+
+<a href="{{ url_for('addWorker') }}">
+    <span class="btn btn-success btn-sm">Добавить работника</span>
+</a>
+<a align="right" href="{{ url_for('index') }}">
+    <span class="btn btn-link btn-sm">На главную</span>
+</a>
+<hr>
+
+{% for w in Workers %}
+    
+<div class="alert alert-secondary">
+    <p>
+        <strong>Фамилиия:</strong> {{w[1]}} <br>
+        <strong>Имя:</strong> {{w[2]}} <br>
+        <strong>Отчество</strong> {{w[3]}} <br>
+    </p>
+    <form action="{{ url_for('deleteWorker', id=w[0]) }}" method="POST">
+        <a href="{{ url_for('editWorker', id=w[0]) }}">
+            <span class="btn btn-warning btn-sm">Редактировать</span>
+        </a>
+        <input type="submit" value="Удалить"
+            class="btn btn-danger btn-sm"
+            onclick="return confirm('Вы действительно хотите удалить данного работника?')">
+    </form>
+   
+</div>
+{% endfor %}
+{% endblock %}

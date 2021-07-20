@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{% block title %} Добавление вопроса к повестке дня {% endblock %}</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label for="agenda_item">Вопрос</label>
+        <input required type="text" name="agenda_item"
+               placeholder="Вопрос к повестке дня" class="form-control"
+               value="{{ request.form['agenda_item'] }}"></input>
+    </div>
+
+    <div class="form-group">
+        <label for="agenda_decision">Решение</label>
+        <input required type="text" name="agenda_decision"
+               placeholder="Решение по вопросу" class="form-control"
+               value="{{ request.form['agenda_decision'] }}"></input>
+    </div>
+
+    <div class="form-group">
+        <label for="execution_date">Срок исполнения</label>
+        <input required type="date" name="execution_date"
+               placeholder="Срок исполнения решения по вопросу" class="form-control"
+               value="{{ request.form['execution_date'] }}"></input>
+    </div>
+
+    <div class="form-group">
+        <label for="responsible">Ответственный за исполнение</label>
+        <select required name="responsible" class="selectpicker form-control" >
+            {% for n in Names %}
+            <option value = {{n[0]}}> {{n[1]}} {{n[2]}} {{n[3]}} </option>
+            {% endfor %}
+            </select> 
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Добавить вопрос</button>
+    </div>
+</form>
+{% endblock %}

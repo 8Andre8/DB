@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{% block title %} "{{ employer[1] }}" (Режим редактирования) {% endblock %}</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label for="employer_name">Наименование</label>
+        <input type="text" name="employer_name" placeholder="Название компании или ФИО"
+               class="form-control"
+               value="{{ employer[1] }}">
+        </input>
+    </div>
+
+    <div class="form-group">
+        <label for="employer_type">Тип заказчика</label>
+            <select   name="employer_type" class="selectpicker form-control" >
+            <option value = "Ю"> Ю </option>
+            <option value = "Ф"> Ф </option>
+            </select> 
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+    </div>
+</form>
+<hr>
+
+<form action="{{ url_for('deleteEmployer', id=employer[0]) }}" method="POST">
+    <input type="submit" value="Удалить заказчика"
+            class="btn btn-danger btn-sm"
+            onclick="return confirm('Вы действительно хотите удалить данного заказчика?')">
+</form>
+{% endblock %}

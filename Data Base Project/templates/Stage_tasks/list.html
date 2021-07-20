@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>{% block title %}Задачи этапа{% endblock %}</h1>
+
+<a href="{{ url_for('createTask', id=stage_id) }}">
+    <span class="btn btn-success btn-sm">Создать задачу</span>
+</a>
+<hr>
+
+{% for t in Tasks %}
+    
+<div class="alert alert-secondary">
+    <p>
+        <strong>Название:</strong> {{t[1]}}
+    </p>
+    <p>
+        <strong>Описание:</strong> {{t[2]}}
+    </p>
+    <form action="{{ url_for('deleteTask', id=t[0]) }}" method="POST">
+        <a href="{{ url_for('editTask', id=t[0]) }}">
+            <span class="btn btn-warning btn-sm">Редактировать</span>
+        </a>
+        <input type="submit" value="Удалить"
+            class="btn btn-danger btn-sm"
+            onclick="return confirm('Вы действительно хотите удалить данную задачу?')">
+    </form>
+</div>
+{% endfor %}
+
+{% endblock %}

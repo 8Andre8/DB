@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{% block title %} Создание нового этапа {% endblock %}</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label for="stage_name">Название</label>
+        <input type="text" name="stage_name"
+               placeholder="Название этапа" class="form-control"
+               value="{{ request.form['stage_name'] }}"></input>
+    </div>
+
+    <div class="form-group">
+        <label for="stage_cost">Стоимость</label>
+        <input type="float" name="stage_cost"
+               placeholder="Стоимость этапа" class="form-control"
+               value="{{ request.form['stage_cost'] }}"></input>
+    </div>
+
+    <div class="form-group">
+        <label for="stage_start">Дата начала</label>
+        <input required type="date" name="stage_start"
+               placeholder="Дата начала этапа" class="form-control"
+               value="{{ request.form['stage_start'] }}"></input>
+    </div>
+
+    <div class="form-group">
+        <label for="stage_end">Дата окончания</label>
+        <input required type="date" name="stage_end"
+               placeholder="Дата окончания этапа (планируемая)" class="form-control"
+               value="{{ request.form['stage_end'] }}"></input>
+    </div>
+
+    <div class="form-group">
+        <label for="finish_form">Форма сдачи</label>
+        <input type="text" name="finish_form"
+               placeholder="Форма сдачи этапа" class="form-control"
+               value="{{ request.form['finish_form'] }}"></input>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Создать этап проекта</button>
+    </div>
+</form>
+{% endblock %}

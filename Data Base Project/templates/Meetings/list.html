@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>{% block title %}Совещания{% endblock %}</h1>
+
+<a href="{{ url_for('createMeeting') }}">
+    <span class="btn btn-success btn-sm">Созвать совещание</span>
+</a>
+<a align="right" href="{{ url_for('index') }}">
+    <span class="btn btn-link btn-sm">На главную</span>
+</a>
+<hr>
+
+{% for m in Meetings %}
+    
+<div class="alert alert-secondary">
+    <p>
+        <strong>Дата совещания:</strong> {{m[1]}}
+    </p>
+    <p>
+        <strong>Название проекта:</strong> {{m[2]}}
+    </p>
+    <a href="{{ url_for('agendasList', id=m[0])}}">
+        <span class="btn btn-primary btn-sm">Повестки дня</span>
+    </a>
+    <a href="{{ url_for('meetingParticipantsList', id=m[0])}}">
+        <span class="btn btn-primary btn-sm">Присутствующие</span>
+    </a>
+    <p></p>
+    <form action="{{ url_for('deleteMeeting', id=m[0]) }}" method="POST">
+        <a href="{{ url_for('editMeeting', id=m[0]) }}">
+            <span class="btn btn-warning btn-sm">Редактировать совещание</span>
+        </a>
+        <input type="submit" value="Удалить совещание"
+            class="btn btn-danger btn-sm"
+            onclick="return confirm('Вы действительно хотите удалить данный этап?')">
+    </form>
+    <p></p>
+    <p>
+        <a href="{{ url_for('protocolList', id=m[0])}}">
+            <span class="btn btn-info btn-sm">Сформировать протокол</span>
+        </a>
+    </p>
+</div>
+{% endfor %}
+{% endblock %}

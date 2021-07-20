@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>{% block title %}Заказчики{% endblock %}</h1>
+
+<a href="{{ url_for('addEmployer') }}">
+    <span class="btn btn-success btn-sm">Добавить заказчика</span>
+</a>
+<a align="right" href="{{ url_for('index') }}">
+    <span class="btn btn-link btn-sm">На главную</span>
+</a>
+<hr>
+
+{% for e in Employers %} 
+<div class="alert alert-secondary">
+    <p>
+        <strong>Заказчик:</strong> {{e[1]}}
+    </p>
+    <p>
+        <strong>Тип:</strong> {{e[2]}}
+    </p>
+    <form action="{{ url_for('deleteEmployer', id=e[0]) }}" method="POST">
+        <a href="{{ url_for('editEmployer', id=e[0]) }}">
+            <span class="btn btn-warning btn-sm">Редактировать</span>
+        </a>
+        <input type="submit" value="Удалить"
+            class="btn btn-danger btn-sm"
+            onclick="return confirm('Вы действительно хотите удалить данного заказчика?')">
+    </form>
+</div>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{% block title %} Создание нового проекта {% endblock %}</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label for="project_name">Название</label>
+        <input type="text" name="project_name"
+               placeholder="Название проекта" class="form-control"
+               value="{{ request.form['project_name'] }}"></input>
+    </div>
+
+    <div class="form-group">
+        <label for="soft_type">Тип ПО</label>
+        <input type="text" name="soft_type"
+               placeholder="Тип разрабатываемого ПО" class="form-control"
+               value="{{ request.form['soft_type'] }}"></input>
+    </div>
+
+    <div class="form-group">
+        <label for="employer_ID">Заказчик</label>
+        <select  placeholder="Название компании ИЛИ ФИО заказчика"  name="employer_ID" class="selectpicker form-control" >
+            {% for n in Names %}
+            <option value = {{n[0]}}> {{n[1]}} </option>
+            {% endfor %}
+            </select> 
+    </div>
+
+    <div class="form-group">
+        <label for="project_start">Дата начала</label>
+        <input required type="date" name="project_start"
+               placeholder="Дата начала проекта" class="form-control"
+               value="{{ request.form['project_start'] }}"></input>
+    </div>
+
+    <div class="form-group">
+        <label for="project_end">Дата окончания</label>
+        <input required type="date" name="project_end"
+               placeholder="Дата окончания проекта (планируемая)" class="form-control"
+               value="{{ request.form['project_end'] }}"></input>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Создать проект</button>
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{% block title %} "{{ worker[1] }}" (Режим редактирования) {% endblock %}</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label for="second_name">Фамилия</label>
+        <input type="text" name="second_name" placeholder="Фамилия"
+               class="form-control"
+               value="{{ request.form['second_name'] or worker['second_name'] }}">
+        </input>
+    </div>
+
+    <div class="form-group">
+        <label for="first_name">Имя</label>
+        <input type="text" name="first_name" placeholder="Имя"
+               class="form-control"
+               value="{{ request.form['first_name'] or worker['first_name'] }}">
+        </input>
+    </div>
+    
+    <div class="form-group">
+        <label for="father_name">Отчество</label>
+        <input type="text" name="father_name" placeholder="Отчество"
+               class="form-control"
+               value="{{ request.form['father_name'] or worker['father_name'] }}">
+        </input>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+    </div>
+</form>
+<hr>
+
+<form action="{{ url_for('deleteWorker', id=worker[0]) }}" method="POST">
+    <input type="submit" value="Удалить работника"
+            class="btn btn-danger btn-sm"
+            onclick="return confirm('Вы действительно хотите удалить данного работника?')">
+</form>
+{% endblock %}

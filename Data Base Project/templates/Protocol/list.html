@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>{% block title %}Протокол №{{Number}} {% endblock %}</h1>
+
+<hr>
+<div class="alert alert-light">
+    <p>
+        <strong>Дата совещания:</strong> {{Date[0]}}
+    </p>
+</div>
+
+<h3>Повестка дня</h3>
+{% for a in Agendas %}  
+<div class="alert alert-light">
+    <p>
+        <strong>Вопрос:</strong> {{a[1]}}
+    </p>
+    <p>
+        <strong>Решение:</strong> {{a[2]}}
+    </p>
+    <p>
+        <strong>Срок выполнения:</strong> {{a[3]}}
+    </p>
+    <p>
+        <strong>Ответственный:</strong> {{a[5]}}
+    </p>
+    <p>
+        <strong>Отметка об исполнении:</strong> {{a[4]}}
+    </p>
+</div>
+{% endfor %}
+
+<h3>Присутствующие</h3>
+{% for p in Participants %}  
+<div class="alert alert-light">
+    <p>
+        <strong>Фамилия:</strong> {{p[0]}}
+    </p>
+    <p>
+        <strong>Имя:</strong> {{p[1]}}
+    </p>
+    <p>
+        <strong>Отчество:</strong> {{p[2]}}
+    </p>
+</div>
+{% endfor %}
+
+<h4>Подпись заказчика ___________________________</h4> 
+<h4>Подпись исполнителя ___________________________</h4> 
+
+{% endblock %}

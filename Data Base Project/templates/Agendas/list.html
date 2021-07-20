@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>{% block title %}Повестка дня{% endblock %}</h1>
+
+<a href="{{ url_for('createAgenda', id=meeting_id) }}">
+    <span class="btn btn-success btn-sm">Добавить вопрос к повестке</span>
+</a>
+<hr>
+
+{% for a in Agendas %}
+    
+<div class="alert alert-secondary">
+    <p>
+        <strong>Вопрос:</strong> {{a[1]}}
+    </p>
+    <p>
+        <strong>Решение:</strong> {{a[2]}}
+    </p>
+    <p>
+        <strong>Срок выполнения:</strong> {{a[3]}}
+    </p>
+    <p>
+        <strong>Отметка о выполнении:</strong> {{a[4]}}
+    </p>
+    <p>
+        <strong>Ответственный:</strong> {{a[5]}}
+    </p>
+    <form action="{{ url_for('deleteAgenda', id=a[0]) }}" method="POST">
+        <a href="{{ url_for('editAgenda', id=a[0]) }}">
+            <span class="btn btn-warning btn-sm">Редактировать</span>
+        </a>
+        <input type="submit" value="Удалить"
+            class="btn btn-danger btn-sm"
+            onclick="return confirm('Вы действительно хотите удалить данный вопрос?')">
+    </form>
+</div>
+{% endfor %}
+{% endblock %}

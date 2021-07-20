@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{% block title %} "{{ stage[1] }}" (Режим редактирования) {% endblock %}</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label for="stage_name">Название</label>
+        <input type="text" name="stage_name"
+               placeholder="Название этапа" class="form-control"
+               value="{{ stage[1] }}"></input>
+    </div>
+
+    <div class="form-group">
+        <label for="stage_cost">Стоимость</label>
+        <input type="float" name="stage_cost"
+               placeholder="Стоимость этапа" class="form-control"
+               value="{{ stage[2] }}"></input>
+    </div>
+
+    <div class="form-group">
+        <label for="stage_start">Дата начала</label>
+        <input required type="date" name="stage_start"
+               placeholder="Дата начала этапа" class="form-control"
+               value="{{ stage[3] }}"></input>
+    </div>
+
+    <div class="form-group">
+        <label for="stage_end">Дата окончания</label>
+        <input required type="date" name="stage_end"
+               placeholder="Дата окончания этапа (планируемая)" class="form-control"
+               value="{{ stage[4] }}"></input>
+    </div>
+
+    <div class="form-group">
+        <label for="finish_form">Форма сдачи</label>
+        <input type="text" name="finish_form"
+               placeholder="Форма сдачи этапа" class="form-control"
+               value="{{ stage[5] }}"></input>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+    </div>
+<hr>
+{% endblock %}

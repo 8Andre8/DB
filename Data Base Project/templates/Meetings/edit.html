@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{% block title %} Совещание от "{{ meeting[1] }}" (Режим редактирования) {% endblock %}</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label for="meeting_date">Дата совещания</label>
+        <input required type="date" name="meeting_date"
+               placeholder="Дата проведения совещания" class="form-control"
+               value="{{ meeting[1]}}"></input>
+    </div>
+
+    <div class="form-group">
+        <label for="project_ID">Проект</label>
+        <select required name="project_ID" class="selectpicker form-control" >
+            {% for p in Projects %}
+            <option value = {{p[0]}}> {{p[1]}} - {{p[2]}} </option>
+            {% endfor %}
+            </select> 
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+    </div>
+<hr>
+{% endblock %}

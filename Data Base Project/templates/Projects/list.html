@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>{% block title %}Проекты{% endblock %}</h1>
+<a href="{{ url_for('createProject') }}">
+    <span class="btn btn-success btn-sm">Создать проект</span>
+</a>
+<a align="right" href="{{ url_for('index') }}">
+    <span class="btn btn-link btn-sm">На главную</span>
+</a>
+<hr>
+
+{% for p in Projects %}
+    
+<div class="alert alert-secondary">
+    <p>
+        <strong>Название проекта:</strong> {{p[1]}}
+    </p>
+    <p>
+        <strong>Тип ПО:</strong> {{p[2]}}
+    </p>
+    <p>
+        <strong>Заказчик:</strong> {{p[3]}}
+    </p>
+    <p>
+        <strong>Стоимость:</strong> {{p[4]}} руб.
+    </p>
+    <p>
+        <strong>Дата начала:</strong> {{p[5]}}
+    </p>
+    <p>
+        <strong>Дата окончания:</strong> {{p[6]}}
+    </p>
+    <p>
+        <strong>Дата реального окончания:</strong> {{p[7]}}
+    </p>
+    <a href="{{ url_for('stagesList', id=p[0])}}">
+        <span class="btn btn-primary btn-sm">Этапы проекта</span>
+    </a>
+    <a href="{{ url_for('documentsList', id=p[0])}}">
+        <span class="btn btn-primary btn-sm">Документы</span>
+    </a>
+    <p></p>
+    <form action="{{ url_for('deleteProject', id=p[0]) }}" method="POST">
+        <a href="{{ url_for('editProject', id=p[0]) }}">
+            <span class="btn btn-warning btn-sm">Редактировать проект</span>
+        </a>
+        <input type="submit" value="Удалить проект"
+            class="btn btn-danger btn-sm"
+            onclick="return confirm('Вы действительно хотите удалить данный проект?')">
+    </form>
+</div>
+{% endfor %}
+{% endblock %}

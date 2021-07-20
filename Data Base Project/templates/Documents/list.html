@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>{% block title %}Документы{% endblock %}</h1>
+
+<a href="{{ url_for('createDocument', id=project_id) }}">
+    <span class="btn btn-success btn-sm">Добавить документ</span>
+</a>
+<hr>
+
+{% for d in Documents %}
+    
+<div class="alert alert-secondary">
+    <p>
+        <strong>Название:</strong> {{d[1]}}
+    </p>
+    <p>
+        <strong>Дата изменения статуса:</strong> {{d[2]}}
+    </p>
+    <p>
+        <strong>Разработчик:</strong> {{d[3]}}
+    </p>
+    <p>
+        <strong>Статус:</strong> {{d[4]}}
+    </p>
+    <form action="{{ url_for('deleteDocument', id=d[0]) }}" method="POST">
+        <a href="{{ url_for('editDocument', id=d[0]) }}">
+            <span class="btn btn-warning btn-sm">Редактировать</span>
+        </a>
+        <input type="submit" value="Удалить"
+            class="btn btn-danger btn-sm"
+            onclick="return confirm('Вы действительно хотите удалить данный документ?')">
+    </form>
+</div>
+{% endfor %}
+{% endblock %}

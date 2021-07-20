@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{% block title %} Создание нового документа {% endblock %}</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label for="document_name">Название</label>
+        <input required type="text" name="document_name"
+               placeholder="Название документа" class="form-control"
+               value="{{ request.form['document_name'] }}"></input>
+    </div>
+
+    <div class="form-group">
+        <label for="document_status">Статус документа</label>
+        <select required name="document_status" class="selectpicker form-control" >
+            <option value = "В разработке"> В разработке </option>
+            <option value = "Не согласован"> Не согласован </option>
+            <option value = "Принят"> Принят </option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="change_status_date">Дата начала</label>
+        <input required type="date" name="change_status_date"
+               placeholder="Дата начала этапа" class="form-control"
+               value="{{ request.form['change_status_date'] }}"></input>
+    </div>
+
+    <div class="form-group">
+        <label for="document_developer">Разработчик документа</label>
+        <select required name="document_developer" class="selectpicker form-control" >
+            {% for n in Names %}
+            <option value = {{n[0]}}> {{n[1]}} {{n[2]}} {{n[3]}} </option>
+            {% endfor %}
+            </select>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Создать документ</button>
+    </div>
+</form>
+{% endblock %}

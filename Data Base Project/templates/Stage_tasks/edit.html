@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{% block title %} "{{ task[1] }}" (Режим редактирования) {% endblock %}</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label for="task_name">Заголовок</label>
+        <input type="text" name="title" placeholder="Название задачи"
+               class="form-control"
+               value="{{ task[1] }}"></input>
+    </div>
+
+    <div class="form-group">
+        <label for="content">Описание задачи</label>
+        <textarea name="content" placeholder="Описание задачи"
+                  class="form-control">{{ task[2] }}</textarea>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+    </div>
+</form>
+<hr>
+<form action="{{ url_for('deleteTask', id=task[0]) }}" method="POST">
+    <input type="submit" value="Удалить задачу"
+            class="btn btn-danger btn-sm"
+            onclick="return confirm('Вы действительно хотите удалить задачу?')">
+</form>
+{% endblock %}

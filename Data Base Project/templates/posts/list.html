@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>{% block title %}Посты{% endblock %}</h1>
+
+<a href="{{ url_for('posts_create') }}">
+    <span class="btn btn-success btn-sm">Создать пост</span>
+</a>
+<hr>
+
+{% for post in posts %}
+    <a href="{{ url_for('posts_item', post_id=post['id']) }}">
+        <h2>{{ post['title'] }}</h2>
+    </a>
+    <span class="badge badge-primary">{{ post['created'] }}</span>
+
+    <form action="{{ url_for('posts_delete', id=post['id']) }}" method="POST">
+        <a href="{{ url_for('posts_edit', id=post['id']) }}">
+            <span class="btn btn-warning btn-sm">Редактировать</span>
+        </a>
+
+        <input type="submit" value="Удалить"
+            class="btn btn-danger btn-sm"
+            onclick="return confirm('Вы действительно хотите удалить пост?')">
+    </form>
+    <hr>
+{% endfor %}
+{% endblock %}

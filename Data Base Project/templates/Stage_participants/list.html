@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>{% block title %}Участники этапа{% endblock %}</h1>
+
+<a href="{{ url_for('addStageParticipant', id=stage_id) }}">
+    <span class="btn btn-success btn-sm">Добавить участника</span>
+</a>
+<hr>
+
+{% for p in Participants %}
+    
+<div class="alert alert-secondary">
+    <p>
+        <strong>Фамилия:</strong> {{p[1]}}
+    </p>
+    <p>
+        <strong>Имя:</strong> {{p[2]}}
+    </p>
+    <p>
+        <strong>Отчество:</strong> {{p[3]}}
+    </p>
+    <p>
+        <strong>Роль:</strong> {{p[4]}}
+    </p>
+    <form action="{{ url_for('deleteStageParticipant', id=p[0]) }}" method="POST">
+        <a href="{{ url_for('editStageParticipant', id=p[0]) }}">
+            <span class="btn btn-warning btn-sm">Редактировать</span>
+        </a>
+        <input type="submit" value="Удалить участника"
+            class="btn btn-danger btn-sm"
+            onclick="return confirm('Вы действительно хотите удалить данного участника?')">
+    </form>
+</div>
+{% endfor %}
+{% endblock %}

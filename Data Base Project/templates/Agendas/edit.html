@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{% block title %} "{{ agenda[1] }}" (Режим редактирования) {% endblock %}</h1>
+
+<form method="post">
+
+    <div class="form-group">
+        <label for="agenda_item">Вопрос</label>
+        <input required type="text" name="agenda_item" autocomplete="on"
+               placeholder="Вопрос к повестке дня" class="form-control"
+               value="{{ agenda[1] }}"></input>
+    </div>
+
+    <div class="form-group">
+        <label for="agenda_decision">Решение</label>
+        <input required type="text" name="agenda_decision"
+               placeholder="Решение по вопросу" class="form-control"
+               value="{{ agenda[2] }}"></input>
+    </div>
+
+    <div class="form-group">
+        <label for="execution_date">Срок исполнения</label>
+        <input required type="date" name="execution_date"
+               placeholder="Срок исполнения решения по вопросу" class="form-control"
+               value="{{ agenda[3] }}"></input>
+    </div>
+
+    <div class="form-group">
+        <label for="responsible">Ответственный за исполнение</label>
+        <select required name="responsible" class="selectpicker form-control" >
+            {% for n in Names %}
+            <option value = {{n[0]}}> {{n[1]}} {{n[2]}} {{n[3]}} </option>
+            {% endfor %}
+            </select> 
+    </div>
+
+    <div class="form-group">
+        <label for="completion_date">Отметка об исполнении</label>
+        <input type="date" name="completion_date"
+               placeholder="Дата исполнения вопроса" class="form-control"></input>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+    </div>
+<hr>
+{% endblock %}

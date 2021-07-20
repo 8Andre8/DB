@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>{% block title %}Этапы проекта{% endblock %}</h1>
+
+<a href="{{ url_for('createStage', id = project_id) }}">
+    <span class="btn btn-success btn-sm">Создать этап проекта</span>
+</a>
+<hr>
+{% for s in Stages %}
+<div class="alert alert-secondary">
+    <p>
+        <strong>Название этапа:</strong> {{s[1]}}
+    </p>
+    <p>
+        <strong>Стоимость этапа:</strong> {{s[2]}} руб.
+    </p>
+    <p>
+        <strong>Дата начала:</strong> {{s[3]}}
+    </p>
+    <p>
+        <strong>Дата окончания:</strong> {{s[4]}}
+    </p>
+    <p>
+        <strong>Форма сдачи этапа:</strong> {{s[5]}}
+    </p>
+    <a href="{{ url_for('stageTasksList', id=s[0])}}">
+        <span class="btn btn-primary btn-sm">Задачи этапа</span>
+    </a>
+    <a href="{{ url_for('stageParticipantsList', id=s[0])}}">
+        <span class="btn btn-primary btn-sm">Участники этапа</span>
+    </a>
+    <p></p>
+    <form action="{{ url_for('deleteStage', id=s[0]) }}" method="POST">
+        <a href="{{ url_for('editStage', id=s[0]) }}">
+            <span class="btn btn-warning btn-sm">Редактировать этап</span>
+        </a>
+        <input type="submit" value="Удалить этап"
+            class="btn btn-danger btn-sm"
+            onclick="return confirm('Вы действительно хотите удалить данный этап?')">
+    </form>
+</div>
+{% endfor %}
+{% endblock %}
