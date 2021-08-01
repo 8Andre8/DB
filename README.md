@@ -15,5 +15,5 @@
 * Cредство администрирования базы данных: [PHP Adminer](https://www.adminer.org/).
 * SQL.
 * HTML, CSS.
-* Фреймворки: [Flask](https://flask-russian-docs.readthedocs.io/ru/master/), [Vue](https://vuejs.org/), [Bootstrap](https://getbootstrap.com/).
+* Фреймворки: [Flask](https://flask-russian-docs.readthedocs.io/ru/master/), [Bootstrap](https://getbootstrap.com/).
 
